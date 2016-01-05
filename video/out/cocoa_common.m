@@ -745,6 +745,7 @@ static void vo_cocoa_fullscreen_done(struct vo *vo)
     opts->fullscreen = !opts->fullscreen;
     NSLog(@"vo_cocoa_fullscreen_done %d\n", opts->fullscreen);
     flag_events(vo, VO_EVENT_ICC_PROFILE_CHANGED);
+    flag_events(vo, VO_EVENT_WIN_STATE);
     resize_event(vo);
 }
 
