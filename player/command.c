@@ -4669,6 +4669,16 @@ int run_command(struct MPContext *mpctx, struct mp_cmd *cmd, struct mpv_node *re
         break;
     }
 
+    case MP_CMD_SUB_FORCE: {
+        struct track *track = mpctx->current_track[0][STREAM_SUB];
+        struct dec_sub *sub = track ? track->d_sub : NULL;
+	bool enable = cmd->args[0].v.i == 0;
+
+	if (sub)
+	    sub_set_force_reading(sub, enable);
+	break;
+    }
+
     case MP_CMD_SUB_STEP:
     case MP_CMD_SUB_SEEK: {
         if (!mpctx->playback_initialized)

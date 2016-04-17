@@ -91,6 +91,8 @@ const struct mp_cmd_def mp_cmds[] = {
                       {"force", 1})),
   }},
   { MP_CMD_PLAYLIST_SHUFFLE, "playlist-shuffle", },
+  { MP_CMD_SUB_FORCE, "sub-force", { OARG_CHOICE(0, ({"enable", 0},
+                                                     {"disable", 1}))}},
   { MP_CMD_SUB_STEP, "sub-step", { ARG_INT }, .allow_auto_repeat = true },
   { MP_CMD_SUB_SEEK, "sub-seek", { ARG_INT }, .allow_auto_repeat = true },
   { MP_CMD_OSD, "osd", { OARG_INT(-1) } },
