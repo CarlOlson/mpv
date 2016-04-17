@@ -318,3 +318,8 @@ int sub_control(struct dec_sub *sub, enum sd_ctrl cmd, void *arg)
     pthread_mutex_unlock(&sub->lock);
     return r;
 }
+
+void sub_set_force_reading(struct dec_sub *sub, bool enable)
+{
+    demux_set_force_subtitle_reading(sub->sh, enable);
+}

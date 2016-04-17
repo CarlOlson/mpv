@@ -236,6 +236,8 @@ void free_demuxer_and_stream(struct demuxer *demuxer);
 void demux_add_packet(struct sh_stream *stream, demux_packet_t *dp);
 void demuxer_feed_caption(struct sh_stream *stream, demux_packet_t *dp);
 
+void demux_set_force_subtitle_reading(struct sh_stream *sh, bool enable);
+
 struct demux_packet *demux_read_packet(struct sh_stream *sh);
 int demux_read_packet_async(struct sh_stream *sh, struct demux_packet **out_pkt);
 bool demux_stream_is_selected(struct sh_stream *stream);

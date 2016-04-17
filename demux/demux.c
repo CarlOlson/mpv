@@ -153,6 +153,7 @@ struct demux_stream {
                             // read (like subtitles)
     bool eof;               // end of demuxed stream? (true if all buffer empty)
     bool refreshing;
+    bool force_subtitle_reading;
     size_t packs;           // number of packets in buffer
     size_t bytes;           // total bytes of packets in buffer
     double base_ts;         // timestamp of the last packet returned to decoder
@@ -714,7 +715,7 @@ static struct demux_packet *dequeue_packet(struct demux_stream *ds)
 // try to exceed default readahead in order to find a new packet.
 static bool use_lazy_subtitle_reading(struct demux_stream *ds)
 {
-    if (ds->type != STREAM_SUB)
+    if (ds->type != STREAM_SUB || ds->force_subtitle_reading)
         return false;
     for (int n = 0; n < ds->in->num_streams; n++) {
         struct demux_stream *s = ds->in->streams[n]->ds;
@@ -722,6 +723,13 @@ static bool use_lazy_subtitle_reading(struct demux_stream *ds)
             return true;
     }
     return false;
+}
+
+void demux_set_force_subtitle_reading(struct sh_stream *sh, bool enable)
+{
+    struct demux_stream *ds = sh ? sh->ds : NULL;
+    if (ds)
+	ds->force_subtitle_reading = enable;
 }
 
 // Read a packet from the given stream. The returned packet belongs to the

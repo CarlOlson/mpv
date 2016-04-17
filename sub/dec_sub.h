@@ -43,4 +43,6 @@ void sub_select(struct dec_sub *sub, bool selected);
 
 int sub_control(struct dec_sub *sub, enum sd_ctrl cmd, void *arg);
 
+void sub_set_force_reading(struct dec_sub *sub, bool enable);
+    
 #endif
